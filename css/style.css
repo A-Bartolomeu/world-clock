@@ -1,6 +1,6 @@
 body {
   background-color: #dadbdf;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .container {
@@ -48,20 +48,85 @@ select {
   width: 98%;
   background-color: transparent;
   border-radius: 50%;
-  box-shadow: inset -3px -3px 5px #ffffff, inset 2px 3px 12px #b6b6b863,
+  box-shadow: inset -7px -7px 9px #ffffffc2, inset 7px 7px 13px #b6b6b8b3,
     3px 3px 5px 0px #bebebe52, -3px -3px 5px #ffffff7d;
+}
+
+.minute,
+.hour {
+  position: absolute;
+  height: 107.8px;
+  width: 3px;
+  margin: auto;
+  top: -49%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 4px;
+  background: #7b0bdd;
+  transform-origin: bottom center;
+  z-index: 4;
+}
+.minute {
+  height: 55px;
+  top: -25%;
+  left: 0px;
+  background: #d7ff00;
+  z-index: 2;
+}
+.second {
+  position: absolute;
+  height: 118px;
+  width: 1px;
+  margin: auto;
+  top: -58%;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  border-radius: 2px;
+  background: black;
+  box-shadow: 3px 3px 5px #d2d2e1;
+  transform-origin: bottom center;
+  z-index: -2;
+}
+
+.dialpoint {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background: #b3b3b0;
+  z-index: 3;
+}
+.dialpoint_twelve {
+  top: 15px;
+}
+.dialpoint_three {
+  top: 107.8px;
+  margin-left: 195px;
+}
+.dialpoint_six {
+  top: 107.8px;
+  margin-left: -195px;
+}
+.dialpoint_nine {
+  top: 205px;
 }
 
 .current-city {
   text-align: center;
 }
 h3 {
-  font-size: 15px;
+  font-size: 22px;
+  font-weight: 300;
+  color: #b7b8b9;
   margin: 0;
 }
 p {
-  font-size: 10px;
-  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #7b0bddad;
+  margin: 5px 0;
 }
 
 .footer-coder {
