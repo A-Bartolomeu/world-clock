@@ -5,10 +5,10 @@ body {
 
 .container {
   background-color: #efefef;
-  max-width: 600px;
+  max-width: 530px;
   margin: 20px auto;
   border-radius: 15px;
-  padding: 10px;
+  padding: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -127,6 +127,39 @@ p {
   font-weight: 700;
   color: #7b0bddad;
   margin: 5px 0;
+}
+
+.other-city {
+  display: flex;
+  padding: 10px 35px;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.other-city:last-child {
+  border: none;
+}
+
+h5 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #989898;
+  margin: 5px 0;
+}
+.date {
+  font-size: 15px;
+  font-weight: 300;
+  color: #b7b8b9;
+  margin: 5px 0;
+}
+.time {
+  font-size: 20px;
+  line-height: 50px;
+  color: #7b0bdd8a;
+}
+.time small {
+  font-size: 10px;
+  vertical-align: top;
 }
 
 .footer-coder {
