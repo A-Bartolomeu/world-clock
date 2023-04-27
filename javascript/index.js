@@ -1,3 +1,34 @@
+function clockCurrent() {
+  //let currentElement = document.querySelector("#current-city");
+  let currentDetailsElement = document.querySelector("#current-city-details");
+  let currentLocation = moment.tz.guess();
+  let currentCityTime = moment().tz(currentLocation);
+  let currentCityName = currentLocation.replace("_", " ").split("/")[1];
+  let currentCountryName = currentLocation.replace("_", " ").split("/")[0];
+
+  currentDetailsElement.innerHTML = `
+    <div class="current-city">
+        <h3>${currentCityName} | ${currentCountryName}</h3>
+        <p>${currentCityTime.format("dddd, Do MMMM YYYY")}</p>
+    </div>
+  `;
+
+  //const hours = (currentCityTime.format("hh" + 11) % 12) + 1;
+  const hours = currentCityTime.format("hh");
+  const minutes = currentCityTime.format("mm");
+  const seconds = currentCityTime.format("ss");
+
+  //const hour = (hours + minutes / 600) * 30;
+
+  const minute = minutes * 6;
+  const hour = hours * 30;
+  const second = seconds * 6;
+
+  document.querySelector(".hour").style.transform = `rotate(${hour}deg)`;
+  document.querySelector(".minute").style.transform = `rotate(${minute}deg)`;
+  document.querySelector(".second").style.transform = `rotate(${second}deg)`;
+}
+
 function updateTime() {
   // London
   let londonElement = document.querySelector("#london");
@@ -63,3 +94,5 @@ setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#add-city");
 citiesSelectElement.addEventListener("change", updateCity);
+clockCurrent();
+setInterval(clockCurrent, 1000);

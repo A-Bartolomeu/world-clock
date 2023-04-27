@@ -69,7 +69,7 @@ select {
   transform-origin: bottom center;
   z-index: 4;
 }
-.minute {
+.hour {
   height: 55px;
   top: -25%;
   left: 0px;
@@ -81,7 +81,7 @@ select {
   height: 118px;
   width: 1px;
   margin: auto;
-  top: -58%;
+  top: -54%;
   left: 0px;
   bottom: 0px;
   right: 0px;
