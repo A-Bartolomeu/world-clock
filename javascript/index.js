@@ -87,9 +87,8 @@ function updateCity(event) {
   )}</small></div>
   </div>
   `;
-  setTimeout(() => {
-    updateCity(event);
-  }, 1000);
+  let cityDefaultElement = document.querySelector("#cities-default");
+  cityDefaultElement.innerHTML = "";
 }
 
 updateTime();
