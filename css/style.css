@@ -168,5 +168,13 @@ h5 {
   font-size: 8px;
   text-align: center;
   display: block;
-  padding-top: 10px;
+  color: #989898;
+}
+
+.footer-coder a {
+  text-decoration: none;
+  color: #7b0bdd8a;
+}
+.footer-coder a:hover {
+  text-decoration: underline;
 }
