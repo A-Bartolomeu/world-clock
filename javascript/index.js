@@ -69,13 +69,15 @@ function updateTime() {
     );
   }
 }
-
+let lastCityElement; // variável global para armazenar o último elemento adicionado
 function updateCity(event) {
   let cityTimeZone = event.target.value;
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let countryName = cityTimeZone.replace("_", " ").split("/")[0];
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#new-city");
+  let cityDefaultElement = document.querySelector("#cities-default");
+  cityDefaultElement.innerHTML = "";
   citiesElement.innerHTML += `
   <div class="other-city">
     <div>
@@ -87,13 +89,28 @@ function updateCity(event) {
   )}</small></div>
   </div>
   `;
-  let cityDefaultElement = document.querySelector("#cities-default");
-  cityDefaultElement.innerHTML = "";
+
+  citiesElement.appendChild(newCityElement);
+  lastCityElement = newCityElement; // atualiza a referência para o último elemento adicionado
+}
+
+function updateNewCity() {
+  if (lastCityElement) {
+    // verifica se há algum elemento adicionado
+    let cityTimeElement = lastCityElement.querySelector(".time");
+    let cityTimeZone = lastCityElement
+      .querySelector("h5")
+      .textContent.replace(" | ", "/");
+    let cityTime = moment().tz(cityTimeZone);
+    cityTimeElement.innerHTML = `${cityTime.format(
+      "hh:mm:ss"
+    )} <small>${cityTime.format("A")}</small>`;
+  }
 }
 
 updateTime();
 setInterval(updateTime, 1000);
-
+setInterval(updateNewCity, 1000);
 let citiesSelectElement = document.querySelector("#add-city");
 citiesSelectElement.addEventListener("change", updateCity);
 clockCurrent();
