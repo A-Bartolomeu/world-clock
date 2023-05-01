@@ -87,6 +87,9 @@ function updateCity(event) {
   )}</small></div>
   </div>
   `;
+  setTimeout(() => {
+    updateCity(event);
+  }, 1000);
 }
 
 updateTime();
