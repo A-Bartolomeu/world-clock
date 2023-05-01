@@ -1,0 +1,5 @@
+{
+  "vim.surround": true,
+  "vim.autoindent": true,
+  "vim.disableExtension": false
+}

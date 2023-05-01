@@ -30,6 +30,19 @@ function clockCurrent() {
 }
 
 function updateTime() {
+  // New York
+  let newyorkElement = document.querySelector("#new_york");
+  if (newyorkElement) {
+    let newyorkDateElement = newyorkElement.querySelector(".date");
+    let newyorkTimeElement = newyorkElement.querySelector(".time");
+    let newyorkTime = moment().tz("America/New_York");
+
+    newyorkDateElement.innerHTML = newyorkTime.format("dddd, Do MMMM YYYY");
+    newyorkTimeElement.innerHTML = newyorkTime.format(
+      "hh:mm:ss [<small>]A[</small>]"
+    );
+  }
+
   // London
   let londonElement = document.querySelector("#london");
   if (londonElement) {
@@ -39,19 +52,6 @@ function updateTime() {
 
     londonDateElement.innerHTML = londonTime.format("dddd, Do MMMM YYYY");
     londonTimeElement.innerHTML = londonTime.format(
-      "hh:mm:ss [<small>]A[</small>]"
-    );
-  }
-
-  // Paris
-  let parisElement = document.querySelector("#paris");
-  if (parisElement) {
-    let parisDateElement = parisElement.querySelector(".date");
-    let parisTimeElement = parisElement.querySelector(".time");
-    let parisTime = moment().tz("Europe/Paris");
-
-    parisDateElement.innerHTML = parisTime.format("dddd, Do MMMM YYYY");
-    parisTimeElement.innerHTML = parisTime.format(
       "hh:mm:ss [<small>]A[</small>]"
     );
   }
