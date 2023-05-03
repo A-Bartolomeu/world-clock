@@ -69,6 +69,7 @@ function updateTime() {
     );
   }
 }
+
 let lastCityElement; // variável global para armazenar o último elemento adicionado
 function updateCity(event) {
   let cityTimeZone = event.target.value;
