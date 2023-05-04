@@ -13,12 +13,9 @@ function clockCurrent() {
     </div>
   `;
 
-  //const hours = (currentCityTime.format("hh" + 11) % 12) + 1;
   const hours = currentCityTime.format("hh");
   const minutes = currentCityTime.format("mm");
   const seconds = currentCityTime.format("ss");
-
-  //const hour = (hours + minutes / 600) * 30;
 
   const minute = minutes * 6;
   const hour = hours * 30;
@@ -29,7 +26,7 @@ function clockCurrent() {
   document.querySelector(".second").style.transform = `rotate(${second}deg)`;
 }
 
-function updateTime() {
+function defaultCityTime() {
   // New York
   let newyorkElement = document.querySelector("#new_york");
   if (newyorkElement) {
@@ -42,7 +39,6 @@ function updateTime() {
       "hh:mm:ss [<small>]A[</small>]"
     );
   }
-
   // London
   let londonElement = document.querySelector("#london");
   if (londonElement) {
@@ -55,7 +51,6 @@ function updateTime() {
       "hh:mm:ss [<small>]A[</small>]"
     );
   }
-
   // Tokyo
   let tokyoElement = document.querySelector("#tokyo");
   if (tokyoElement) {
@@ -70,48 +65,51 @@ function updateTime() {
   }
 }
 
-let lastCityElement; // variável global para armazenar o último elemento adicionado
 function updateCity(event) {
   let cityTimeZone = event.target.value;
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let countryName = cityTimeZone.replace("_", " ").split("/")[0];
-  let cityTime = moment().tz(cityTimeZone);
-  let citiesElement = document.querySelector("#new-city");
-  let cityDefaultElement = document.querySelector("#cities-default");
-  cityDefaultElement.innerHTML = "";
-  citiesElement.innerHTML += `
-  <div class="other-city">
-    <div>
-      <h5>${cityName} | ${countryName}</h5>
-        <div class="date">${cityTime.format("dddd, Do MMMM YYYY")}</div>
-    </div>
-      <div class="time">${cityTime.format("hh:mm:ss")} <small>${cityTime.format(
-    "A"
-  )}</small></div>
-  </div>
-  `;
-
-  citiesElement.appendChild(newCityElement);
-  lastCityElement = newCityElement; // atualiza a referência para o último elemento adicionado
-}
-
-function updateNewCity() {
-  if (lastCityElement) {
-    // verifica se há algum elemento adicionado
-    let cityTimeElement = lastCityElement.querySelector(".time");
-    let cityTimeZone = lastCityElement
-      .querySelector("h5")
-      .textContent.replace(" | ", "/");
-    let cityTime = moment().tz(cityTimeZone);
-    cityTimeElement.innerHTML = `${cityTime.format(
-      "hh:mm:ss"
-    )} <small>${cityTime.format("A")}</small>`;
+  let isCityIncluded = cities.find((el) => el.id === cityName);
+  if (!isCityIncluded) {
+    cities.push({
+      id: cityName,
+      cityName,
+      countryName,
+      cityTimeZone,
+    });
   }
 }
 
-updateTime();
-setInterval(updateTime, 1000);
-setInterval(updateNewCity, 1000);
+function renderCities(cities) {
+  if (cities.length === 0) return;
+  let citiesString = "";
+  for (const values of cities) {
+    let { cityName, countryName, cityTimeZone } = values;
+    let cityTime = moment().tz(cityTimeZone);
+    citiesString += `
+      <div class="other-city" id="${cityName.toLowerCase().replace(" ", "")}">
+        <div>
+          <h5>${cityName} | ${countryName}</h5>
+            <div class="date">${cityTime.format("dddd, Do MMMM YYYY")}</div>
+        </div>
+          <div class="time">${cityTime.format(
+            "hh:mm:ss"
+          )} <small>${cityTime.format("A")}</small></div>
+      </div>
+      `;
+  }
+  let citiesElement = document.querySelector("#new-city");
+  let cityDefaultElement = document.querySelector("#cities-default");
+  cityDefaultElement.innerHTML = "";
+  citiesElement.innerHTML = citiesString;
+}
+
+setInterval(() => {
+  renderCities(cities);
+}, 1000);
+let cities = [];
+defaultCityTime();
+setInterval(defaultCityTime, 1000);
 let citiesSelectElement = document.querySelector("#add-city");
 citiesSelectElement.addEventListener("change", updateCity);
 clockCurrent();
